@@ -1,1 +1,36 @@
+
 @import "tailwindcss";
+
+@theme {
+  /* Couleurs Casbah */
+  --color-sand: #F7F1E8;
+  --color-cream: #FFFDF9;
+  --color-night: #1E2A4A;
+  --color-terracotta: #B84A26;
+  --color-terracotta-dark: #9A3D1D;
+  --color-saffron: #E0A526;
+  --color-olive: #5E6B3A;
+
+  /* Polices */
+  --font-display: "Young Serif", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-sand text-night font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  /* Contour visible au clavier : accessibilité */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-terracotta;
+  }
+}
