@@ -1,38 +1,42 @@
+import { useState } from "react";
 import Container from "./components/Container";
-import Button from "./components/Button";
-import PatternDivider from "./components/PatternDivider";
 import SectionTitle from "./components/SectionTitle";
-import { formatPrice } from "./utils/formatPrice";
+import ProductGrid from "./components/ProductGrid";
+import { products } from "./data/products";
+import { categories } from "./data/categories";
 
 function App() {
+  const [selected, setSelected] = useState("all");
+
+  const filtered =
+    selected === "all" ? products : products.filter((p) => p.category === selected);
+
   return (
     <main className="py-12">
       <Container>
-        <h1 className="text-4xl sm:text-5xl">
-          L'artisanat algérien, <span className="text-terracotta">porte après porte</span>
-        </h1>
+        <SectionTitle title="Notre boutique" subtitle="Page de test de l'étape 3." />
 
-        <PatternDivider className="my-8 text-terracotta" />
+        <label className="mb-6 block">
+          <span className="mr-2 font-bold">Catégorie :</span>
+          <select
+            value={selected}
+            onChange={(e) => setSelected(e.target.value)}
+            className="min-h-11 rounded-lg border border-night/30 bg-cream px-3"
+          >
+            <option value="all">Toutes</option>
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </label>
 
-        <SectionTitle title="Test du design system" subtitle="Cette page sera remplacée après." />
-
-        <div className="flex flex-wrap items-center gap-4">
-          <Button onClick={() => alert("Clic !")}>Ajouter</Button>
-          <Button variant="outline">Voir le détail</Button>
-          <Button disabled>Indisponible</Button>
-          <span className="font-bold">{formatPrice(2500)}</span>
-        </div>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <div className="h-16 w-16 rounded-xl bg-cream ring-1 ring-night/20" />
-          <div className="h-16 w-16 rounded-xl bg-night" />
-          <div className="h-16 w-16 rounded-xl bg-terracotta" />
-          <div className="h-16 w-16 rounded-xl bg-saffron" />
-          <div className="h-16 w-16 rounded-xl bg-olive" />
-        </div>
+        <ProductGrid
+          products={filtered}
+          onAdd={(product) => console.log("Ajout :", product.name)}
+        />
       </Container>
     </main>
   );
 }
 
-export default App;
+export default App; 
