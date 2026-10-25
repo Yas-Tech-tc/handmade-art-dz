@@ -18,7 +18,6 @@ function ProductImage({ src, alt, className = "" }) {
       </div>
     );
   }
-
   return (
     <img
       src={src}
@@ -29,5 +28,4 @@ function ProductImage({ src, alt, className = "" }) {
     />
   );
 }
-
 export default ProductImage;

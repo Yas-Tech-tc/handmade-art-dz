@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 import ProductImage from "./ProductImage";
 import { formatPrice } from "../utils/formatPrice";
@@ -8,20 +9,22 @@ function ProductCard({ product, onAdd }) {
 
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-night/10 bg-cream">
-      <div className="relative aspect-square bg-sand">
-        <ProductImage src={images[0]} alt={name} className="h-full w-full" />
+      <Link to={`/produit/${product.id}`} className="relative block aspect-square bg-sand">
+      <ProductImage src={images[0]} alt={name} className="h-full w-full" />
         {isNew && (
-          <span className="absolute left-3 top-3 rounded-full bg-saffron px-3 py-1 text-xs font-bold text-night">
+            <span className="absolute left-3 top-3 rounded-full bg-saffron px-3 py-1 text-xs font-bold   text-night">
             Nouveau
-          </span>
+            </span>
         )}
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col gap-1 p-4">
         <p className="text-xs font-bold uppercase tracking-wide text-olive">
           {getCategoryName(category)}
         </p>
-        <h3 className="text-base leading-snug">{name}</h3>
+        <h3 className="text-base leading-snug">
+          <Link to={`/produit/${product.id}`} className="hover:text-terracotta">{name}</Link>
+        </h3>
 
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
           <span className="font-bold">{formatPrice(price)}</span>
