@@ -1,6 +1,88 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Container from "../components/Container";
+import Button from "../components/Button";
+import ProductGallery from "../components/ProductGallery";
+import QuantitySelector from "../components/QuantitySelector";
+import SectionTitle from "../components/SectionTitle";
+import ProductGrid from "../components/ProductGrid";
 import { products } from "../data/products";
+import { getCategoryName } from "../data/categories";
+import { formatPrice } from "../utils/formatPrice";
+
+function ProductView({ product }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const similar = products
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 4);
+
+  function handleAdd() {
+    console.log("Ajout :", product.name, "x", quantity);
+  }
+
+  return (
+    <Container className="py-8">
+      {/* Fil d'Ariane */}
+      <nav aria-label="Fil d'Ariane" className="mb-6 text-sm text-night/70">
+        <Link to="/" className="hover:text-terracotta">Accueil</Link> /{" "}
+        <Link to="/boutique" className="hover:text-terracotta">Boutique</Link> /{" "}
+        <Link to={`/boutique?categorie=${product.category}`} className="hover:text-terracotta">
+          {getCategoryName(product.category)}
+        </Link>{" "}
+        / <span className="text-night">{product.name}</span>
+      </nav>
+
+      <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
+        <ProductGallery images={product.images} name={product.name} />
+
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wide text-olive">
+            {getCategoryName(product.category)}
+          </p>
+          <h1 className="mt-1 text-3xl leading-tight">{product.name}</h1>
+          <p className="mt-3 text-2xl font-bold">{formatPrice(product.price)}</p>
+
+          <p className={`mt-2 font-medium ${product.inStock ? "text-olive" : "text-night/60"}`}>
+            {product.inStock ? "En stock" : "Épuisé"}
+          </p>
+
+          <p className="mt-5 leading-relaxed">{product.description}</p>
+
+          <dl className="mt-5 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-t border-night/10 pt-5">
+            <dt className="font-bold">Matériaux</dt>
+            <dd>{product.materials}</dd>
+            <dt className="font-bold">Dimensions</dt>
+            <dd>{product.dimensions}</dd>
+            <dt className="font-bold">Fabrication</dt>
+            <dd>Fait main en Algérie</dd>
+          </dl>
+
+          {product.inStock && (
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <QuantitySelector value={quantity} onChange={setQuantity} />
+              <Button onClick={handleAdd} className="flex-1 sm:flex-none">
+                Ajouter · {formatPrice(product.price * quantity)}
+              </Button>
+            </div>
+          )}
+
+          <Link to="/boutique" className="mt-8 inline-block font-bold hover:text-terracotta">
+            ← Retour à la boutique
+          </Link>
+        </div>
+      </div>
+
+      {/* Produits similaires */}
+      {similar.length > 0 && (
+        <section className="mt-16">
+          <SectionTitle title="Dans la même catégorie" />
+          <ProductGrid products={similar} onAdd={(p) => console.log("Ajout :", p.name)} />
+        </section>
+      )}
+    </Container>
+  );
+}
 
 function ProductDetail() {
   const { id } = useParams();
@@ -9,18 +91,15 @@ function ProductDetail() {
   if (!product) {
     return (
       <Container className="py-16">
-        <p>Produit introuvable.</p>
-        <Link to="/boutique" className="font-bold text-terracotta">Retour à la boutique</Link>
+        <h1 className="text-3xl">Produit introuvable</h1>
+        <Link to="/boutique" className="mt-4 inline-block font-bold text-terracotta">
+          Retour à la boutique
+        </Link>
       </Container>
     );
   }
 
-  return (
-    <Container className="py-10">
-      <h1 className="text-3xl">{product.name}</h1>
-      <p className="mt-2">Page détail à construire à l'étape 6.</p>
-    </Container>
-  );
+  return <ProductView key={product.id} product={product} />;
 }
 
 export default ProductDetail;
