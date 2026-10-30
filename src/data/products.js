@@ -2,7 +2,8 @@ export const products = [
   // Maison & Décoration
   { id: 1, name: "Miroir décoratif en cuivre martelé", category: "maison-decoration", price: 6500,
     description: "Miroir rond encadré de cuivre martelé à la main, pour une entrée ou un salon chaleureux.",
-    materials: "Cuivre, verre", dimensions: "Ø 40 cm", images: [], featured: true, isNew: false, inStock: true },
+    materials: "Cuivre, verre", dimensions: "Ø 40 cm", images: [ "/images/products/test1.png",
+  "/images/products/test2.png", "/images/products/test3.png"], featured: true, isNew: false, inStock: true },
   { id: 2, name: "Panier mural en raphia", category: "maison-decoration", price: 2800,
     description: "Panier mural tressé à la main, idéal comme décoration ou pour ranger.",
     materials: "Raphia naturel", dimensions: "Ø 35 cm", images: [], featured: false, isNew: true, inStock: true },
