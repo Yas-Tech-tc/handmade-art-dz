@@ -12,6 +12,6 @@ export const store = configureStore({
 
 store.subscribe(() => {
   const state = store.getState();
-  saveToStorage("handmade-art-dz:cart", state.cart.items);
-  saveToStorage("handmade-art-dz:favorites", state.favorites.ids);
+  saveToStorage("art-dz:cart", state.cart.items);
+  saveToStorage("art-dz:favorites", state.favorites.ids);
 });

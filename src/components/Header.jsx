@@ -28,7 +28,7 @@ function Header() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="font-display text-xl">
-            Handmade Art <span className="text-terracotta">DZ</span>
+            Art <span className="text-terracotta">DZ</span>
           </Link>
 
           <nav className="hidden gap-8 md:flex">{items}</nav>

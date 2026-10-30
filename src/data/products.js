@@ -10,7 +10,7 @@ export const products = [
   // Art de la table & Vaisselle
   { id: 3, name: "Tasse en céramique, calligraphie fine", category: "art-de-la-table", price: 1200,
     description: "Tasse peinte à la main, ornée d'une calligraphie délicate.",
-    materials: "Céramique émaillée", dimensions: "H 9 cm, 25 cl", images: ["/images/products/test1.png", "/images/products/test2.png", "/images/products/test3.png"], featured: false, isNew: false, inStock: true },
+    materials: "Céramique émaillée", dimensions: "H 9 cm, 25 cl", images: [], featured: false, isNew: false, inStock: true },
   { id: 4, name: "Sous-plat bois et faïence peinte", category: "art-de-la-table", price: 2500,
     description: "Sous-plat en bois sombre serti d'une faïence illustrée à la main. Pièce unique.",
     materials: "Bois, faïence", dimensions: "20 x 20 cm", images: [], featured: true, isNew: true, inStock: true },

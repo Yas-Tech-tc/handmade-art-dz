@@ -4,7 +4,7 @@ import { loadFromStorage } from "../utils/storage";
 
 const MAX_QUANTITY = 10;
 function loadItems() {
-  const saved = loadFromStorage("handmade-art-dz:cart", []);
+  const saved = loadFromStorage("art-dz:cart", []);
   if (!Array.isArray(saved)) return [];
 
   return saved.filter(

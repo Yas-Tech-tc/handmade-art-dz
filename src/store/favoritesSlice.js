@@ -3,7 +3,7 @@ import { products } from "../data/products";
 import { loadFromStorage } from "../utils/storage";
 
 function loadIds() {
-  const saved = loadFromStorage("handmade-art-dz:favorites", []);
+  const saved = loadFromStorage("art-dz:favorites", []);
   if (!Array.isArray(saved)) return [];
   return saved.filter((id) => products.some((p) => p.id === id));
 }
