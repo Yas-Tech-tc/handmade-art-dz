@@ -1,11 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { products } from "../data/products";
+import { loadFromStorage } from "../utils/storage";
 
 const MAX_QUANTITY = 10;
+function loadItems() {
+  const saved = loadFromStorage("handmade-art-dz:cart", []);
+  if (!Array.isArray(saved)) return [];
+
+  return saved.filter(
+    (item) =>
+      Number.isInteger(item?.id) &&
+      Number.isInteger(item?.quantity) &&
+      item.quantity >= 1 &&
+      item.quantity <= MAX_QUANTITY &&
+      products.some((p) => p.id === item.id)
+  );
+}
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: { items: [] },
+  initialState: { items: loadItems() },
   reducers: {
     addItem(state, action) {
       const { id, quantity } = action.payload;

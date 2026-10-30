@@ -7,6 +7,7 @@ import { selectCartCount } from "../store/cartSlice";
 const links = [
   { to: "/", label: "Accueil" },
   { to: "/boutique", label: "Boutique" },
+  { to: "/favoris", label: "Favoris" },
 ];
 
 function Header() {
