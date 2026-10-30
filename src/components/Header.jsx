@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Container from "./Container";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "../store/cartSlice";
 
 const links = [
   { to: "/", label: "Accueil" },
@@ -9,7 +11,7 @@ const links = [
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const cartCount = 0; // sera remplacé par Redux plus tard
+  const cartCount = useSelector(selectCartCount);
 
   const linkClass = ({ isActive }) =>
     `py-2 font-medium hover:text-terracotta ${isActive ? "text-terracotta" : ""}`;

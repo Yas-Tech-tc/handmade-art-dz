@@ -3,8 +3,11 @@ import Button from "./Button";
 import ProductImage from "./ProductImage";
 import { formatPrice } from "../utils/formatPrice";
 import { getCategoryName } from "../data/categories";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/cartSlice";
 
-function ProductCard({ product, onAdd }) {
+function ProductCard({ product }) {
+  const dispatch = useDispatch();
   const { name, price, category, images, isNew, inStock } = product;
 
   return (
@@ -28,7 +31,10 @@ function ProductCard({ product, onAdd }) {
 
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
           <span className="font-bold">{formatPrice(price)}</span>
-          <Button onClick={() => onAdd?.(product)} disabled={!inStock}>
+          <Button
+            onClick={() => dispatch(addItem({ id: product.id, quantity: 1 }))}
+            disabled={!inStock}
+          >
             {inStock ? "Ajouter" : "Épuisé"}
           </Button>
         </div>

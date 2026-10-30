@@ -76,7 +76,7 @@ function Home() {
             Tout voir
           </Link>
         </div>
-        <ProductGrid products={featured} onAdd={(p) => console.log("Ajout :", p.name)} />
+        <ProductGrid products={featured} />
       </Container>
 
       {/* Bandeau */}

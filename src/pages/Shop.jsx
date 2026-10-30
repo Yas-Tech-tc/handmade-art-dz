@@ -14,7 +14,7 @@ function Shop() {
     selected === "all" ? products : products.filter((p) => p.category === selected);
 
   function choose(id) {
-    if (id === "all") {
+    if (id === "all") {   
       setParams({});
     } else {
       setParams({ categorie: id });
@@ -25,7 +25,7 @@ function Shop() {
     <Container className="py-10">
       <SectionTitle title="Notre boutique" subtitle={`${list.length} produit(s)`} />
       <CategoryFilter categories={categories} selected={selected} onSelect={choose} />
-      <ProductGrid products={list} onAdd={(p) => console.log("Ajout :", p.name)} />
+      <ProductGrid products={list} />
     </Container>
   );
 }

@@ -9,16 +9,19 @@ import ProductGrid from "../components/ProductGrid";
 import { products } from "../data/products";
 import { getCategoryName } from "../data/categories";
 import { formatPrice } from "../utils/formatPrice";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/cartSlice";
 
 function ProductView({ product }) {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   const similar = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
   function handleAdd() {
-    console.log("Ajout :", product.name, "x", quantity);
+    dispatch(addItem({ id: product.id, quantity }));
   }
 
   return (
@@ -51,7 +54,7 @@ function ProductView({ product }) {
 
           <dl className="mt-5 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-t border-night/10 pt-5">
             <dt className="font-bold">Matériaux</dt>
-            <dd>{product.materials}</dd>
+            <dd>{product.materials}</dd> 
             <dt className="font-bold">Dimensions</dt>
             <dd>{product.dimensions}</dd>
             <dt className="font-bold">Fabrication</dt>
@@ -77,7 +80,7 @@ function ProductView({ product }) {
       {similar.length > 0 && (
         <section className="mt-16">
           <SectionTitle title="Dans la même catégorie" />
-          <ProductGrid products={similar} onAdd={(p) => console.log("Ajout :", p.name)} />
+          <ProductGrid products={similar} />
         </section>
       )}
     </Container>
